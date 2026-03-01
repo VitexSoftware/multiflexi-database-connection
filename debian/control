@@ -1,0 +1,26 @@
+Source: multiflexi-database-connection
+Section: web
+Priority: optional
+Maintainer: "Vítězslav Dvořák" <info@vitexsoftware.cz>
+Build-Depends: debhelper-compat (=13)
+Standards-Version: 4.6.1
+Homepage: https://github.com/VitexSoftware/multiflexi-database-connection
+Rules-Requires-Root: no
+
+Package: multiflexi-database-connection
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}, php-vitexsoftware-multiflexi-core, multiflexi-cli (>= 2.2.0)
+Description: MultiFlexi Database Connection credential prototype
+ PDO database connection credential prototype for MultiFlexi core.
+ Provides the CredentialProtoType class that defines database driver,
+ host, port, name, user and password configuration fields.
+
+Package: multiflexi-database-connection-ui
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}, multiflexi-database-connection (= ${binary:Version}), multiflexi-web
+Description: MultiFlexi Database Connection UI components
+ Database connection dialog for MultiFlexi web interface.
+ Tests PDO connectivity, displays server version/driver info,
+ and lists database tables.

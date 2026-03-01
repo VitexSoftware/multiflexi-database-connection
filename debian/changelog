@@ -1,0 +1,10 @@
+multiflexi-database-connection (2.0.0) UNRELEASED; urgency=medium
+
+  * Initial release as separate source package
+  * Two binary packages: multiflexi-database-connection (core) and
+    multiflexi-database-connection-ui (web interface)
+  * PDO connection testing and table listing
+  * Interactive DSN builder wizard
+  * postinst runs multiflexi-cli crprototype sync
+
+ -- "Vítězslav Dvořák" <info@vitexsoftware.cz>  Sun, 02 Mar 2026 00:00:00 +0100
