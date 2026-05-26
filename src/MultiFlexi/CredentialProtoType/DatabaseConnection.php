@@ -30,30 +30,34 @@ class DatabaseConnection extends \MultiFlexi\CredentialProtoType implements \Mul
     {
         parent::__construct();
 
-        $dbTypeField = new \MultiFlexi\ConfigField('DB_TYPE', 'string', _('Database Type'), _('PDO driver (mysql, pgsql, sqlite)'));
-        $dbTypeField->setHint('mysql')->setValue('mysql');
+        $dbConnectionField = new \MultiFlexi\ConfigField('DB_CONNECTION', 'string', _('Database Connection'), _('PDO driver (mysql, pgsql, sqlsrv, sqlite)'));
+        $dbConnectionField->setHint('mysql')->setValue('mysql');
 
         $dbHostField = new \MultiFlexi\ConfigField('DB_HOST', 'string', _('Database Host'), _('Hostname or IP address of the database server'));
         $dbHostField->setHint('localhost')->setValue('localhost');
 
-        $dbPortField = new \MultiFlexi\ConfigField('DB_PORT', 'string', _('Database Port'), _('Port number (default: 3306 for MySQL, 5432 for PostgreSQL)'));
+        $dbPortField = new \MultiFlexi\ConfigField('DB_PORT', 'string', _('Database Port'), _('Port number (default: 3306 for MySQL, 5432 for PostgreSQL, 1433 for SQL Server)'));
         $dbPortField->setHint('3306')->setValue('');
 
-        $dbNameField = new \MultiFlexi\ConfigField('DB_NAME', 'string', _('Database Name'), _('Name of the database'));
-        $dbNameField->setHint('mydatabase')->setValue('');
+        $dbDatabaseField = new \MultiFlexi\ConfigField('DB_DATABASE', 'string', _('Database Name'), _('Name of the database'));
+        $dbDatabaseField->setHint('mydatabase')->setValue('');
 
-        $dbUserField = new \MultiFlexi\ConfigField('DB_USER', 'string', _('Database User'), _('Username for database authentication'));
-        $dbUserField->setHint('dbuser')->setValue('');
+        $dbUsernameField = new \MultiFlexi\ConfigField('DB_USERNAME', 'string', _('Database Username'), _('Username for database authentication'));
+        $dbUsernameField->setHint('dbuser')->setValue('');
 
         $dbPasswordField = new \MultiFlexi\ConfigField('DB_PASSWORD', 'password', _('Database Password'), _('Password for database authentication'));
         $dbPasswordField->setHint('secret')->setValue('');
 
-        $this->configFieldsInternal->addField($dbTypeField);
+        $dbSettingsField = new \MultiFlexi\ConfigField('DB_SETTINGS', 'string', _('Database Settings'), _('Additional DSN settings (e.g. ;TrustServerCertificate=true)'));
+        $dbSettingsField->setHint('')->setValue('');
+
+        $this->configFieldsInternal->addField($dbConnectionField);
         $this->configFieldsInternal->addField($dbHostField);
         $this->configFieldsInternal->addField($dbPortField);
-        $this->configFieldsInternal->addField($dbNameField);
-        $this->configFieldsInternal->addField($dbUserField);
+        $this->configFieldsInternal->addField($dbDatabaseField);
+        $this->configFieldsInternal->addField($dbUsernameField);
         $this->configFieldsInternal->addField($dbPasswordField);
+        $this->configFieldsInternal->addField($dbSettingsField);
     }
 
     public function load(int $credTypeId)
@@ -79,7 +83,7 @@ class DatabaseConnection extends \MultiFlexi\CredentialProtoType implements \Mul
 
     public static function description(): string
     {
-        return _('PDO database connection credentials for MySQL, PostgreSQL, SQLite');
+        return _('PDO database connection credentials for MySQL, PostgreSQL, SQLite, SQL Server');
     }
 
     public static function uuid(): string
