@@ -76,23 +76,23 @@ class DatabaseConnection extends \MultiFlexi\CredentialProtoType implements \Mul
     {
     }
 
-    public static function name(): string
+    public function name(): string
     {
         return _('Database Connection (PDO)');
     }
 
-    public static function description(): string
+    public function description(): string
     {
         return _('PDO database connection credentials for MySQL, PostgreSQL, SQLite, SQL Server');
     }
 
-    public static function uuid(): string
+    public function uuid(): string
     {
         return 'cd2b27a0-dc5a-45b4-a48e-e4f532260d52';
     }
 
     #[\Override]
-    public static function logo(): string
+    public function logo(): string
     {
         return self::$logo;
     }
