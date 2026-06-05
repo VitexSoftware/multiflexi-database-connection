@@ -1,0 +1,67 @@
+{
+  "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/schema/credential-prototype.json",
+  "uuid": "cd2b27a0-dc5a-45b4-a48e-e4f532260d52",
+  "code": "DatabaseConnection",
+  "name": {
+    "en": "Database Connection (PDO)",
+    "cs": "Připojení k databázi (PDO)"
+  },
+  "description": {
+    "en": "PDO database connection credentials for MySQL, PostgreSQL, SQLite",
+    "cs": "Přihlašovací údaje pro PDO připojení k MySQL, PostgreSQL, SQLite"
+  },
+  "version": "1.0",
+  "logo": "DatabaseConnection.svg",
+  "homepage": "https://github.com/VitexSoftware/multiflexi-database-connection",
+  "tags": [
+    "database",
+    "PDO",
+    "MySQL",
+    "PostgreSQL",
+    "SQLite"
+  ],
+  "fields": [
+    {
+      "keyword": "DB_TYPE",
+      "type": "string",
+      "name": "Database Type",
+      "description": "Database type (mysql, pgsql, sqlite)",
+      "required": true
+    },
+    {
+      "keyword": "DB_HOST",
+      "type": "string",
+      "name": "Database Host",
+      "description": "Database server hostname",
+      "required": true
+    },
+    {
+      "keyword": "DB_PORT",
+      "type": "integer",
+      "name": "Database Port",
+      "description": "Database server port",
+      "required": false
+    },
+    {
+      "keyword": "DB_DATABASE",
+      "type": "string",
+      "name": "Database Name",
+      "description": "Name of the database",
+      "required": true
+    },
+    {
+      "keyword": "DB_USERNAME",
+      "type": "string",
+      "name": "Username",
+      "description": "Database username",
+      "required": true
+    },
+    {
+      "keyword": "DB_PASSWORD",
+      "type": "password",
+      "name": "Password",
+      "description": "Database password",
+      "required": true
+    }
+  ]
+}
