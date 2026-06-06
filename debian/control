@@ -20,7 +20,7 @@ Description: MultiFlexi Database Connection credential prototype
 Package: multiflexi-database-connection-ui
 Architecture: all
 Multi-Arch: foreign
-Depends: ${misc:Depends}, multiflexi-database-connection (= ${binary:Version}), multiflexi-web
+Depends: ${misc:Depends}, multiflexi-database-connection (= ${binary:Version}), multiflexi-web|multiflexi-web5
 Description: MultiFlexi Database Connection UI components
  Database connection dialog for MultiFlexi web interface.
  Tests PDO connectivity, displays server version/driver info,
