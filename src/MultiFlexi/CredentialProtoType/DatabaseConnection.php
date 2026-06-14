@@ -22,7 +22,7 @@ namespace MultiFlexi\CredentialProtoType;
  *
  * @no-named-arguments
  */
-class DatabaseConnection extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface
+class DatabaseConnection extends \MultiFlexi\CredentialProtoType implements \MultiFlexi\credentialTypeInterface, \MultiFlexi\checkableCredentialInterface
 {
     public static string $logo = 'DatabaseConnection.svg';
 
@@ -95,5 +95,64 @@ class DatabaseConnection extends \MultiFlexi\CredentialProtoType implements \Mul
     public function logo(): string
     {
         return self::$logo;
+    }
+
+    #[\Override]
+    public function checkAvailability(): \MultiFlexi\CredentialCheckResult
+    {
+        $f        = fn (string $c) => (string) ($this->configFieldsInternal->getFieldByCode($c)?->getValue() ?? '');
+        $driver   = $f('DB_CONNECTION');
+        $host     = $f('DB_HOST');
+        $port     = $f('DB_PORT');
+        $database = $f('DB_DATABASE');
+        $username = $f('DB_USERNAME');
+        $password = $f('DB_PASSWORD');
+        $settings = $f('DB_SETTINGS');
+
+        if ($driver === '' || $host === '' || $database === '') {
+            $missing = array_keys(array_filter([
+                'DB_CONNECTION' => $driver   === '',
+                'DB_HOST'       => $host     === '',
+                'DB_DATABASE'   => $database === '',
+            ]));
+
+            return new \MultiFlexi\CredentialCheckResult(
+                \MultiFlexi\CredentialState::Misconfigured,
+                sprintf(_('Required fields not set: %s'), implode(', ', $missing)),
+                time(),
+            );
+        }
+
+        if ($driver === 'sqlite') {
+            $dsn = 'sqlite:'.$database;
+        } else {
+            $dsn = $driver.':host='.$host
+                .($port !== '' ? ';port='.$port : '')
+                .';dbname='.$database
+                .$settings;
+        }
+
+        try {
+            new \PDO($dsn, $username, $password, [\PDO::ATTR_TIMEOUT => 5, \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]);
+        } catch (\PDOException $e) {
+            $msg = strtolower($e->getMessage());
+
+            if (str_contains($msg, 'access denied') || str_contains($msg, 'authentication failed') || str_contains($msg, 'password')) {
+                return new \MultiFlexi\CredentialCheckResult(
+                    \MultiFlexi\CredentialState::Misconfigured,
+                    sprintf(_('Database authentication failed: %s'), $e->getMessage()),
+                    time(),
+                );
+            }
+
+            return new \MultiFlexi\CredentialCheckResult(
+                \MultiFlexi\CredentialState::Unavailable,
+                sprintf(_('Cannot connect to database: %s'), $e->getMessage()),
+                time(),
+                60,
+            );
+        }
+
+        return new \MultiFlexi\CredentialCheckResult(\MultiFlexi\CredentialState::Available, '', time(), 300);
     }
 }
