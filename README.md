@@ -1,4 +1,5 @@
 # multiflexi-database-connection
+![Packaging: deb](https://img.shields.io/badge/packaging-.deb-red?logo=debian&logoColor=white)
 
 PDO database connection credential support for [MultiFlexi](https://multiflexi.eu).
 
