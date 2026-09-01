@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="addon">
+  <id>cz.vitexsoftware.multiflexi_database_connection</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <name>MultiFlexi Database Connection</name>
+  <summary>PDO database connection credential prototype for MultiFlexi</summary>
+  <description>
+    <p>
+      Provides the database connection credential prototype for MultiFlexi
+      core, defining the PDO driver, host, port, database, user and password
+      configuration fields required to connect to a MySQL, PostgreSQL or
+      SQLite database.
+    </p>
+    <p>
+      Also ships a web UI component with an interactive DSN builder wizard,
+      a live PDO connection test, server version and driver information
+      display, and database table listing.
+    </p>
+  </description>
+  <icon type="stock">multiflexi-database-connection</icon>
+  <url type="homepage">https://github.com/VitexSoftware/multiflexi-database-connection</url>
+  <url type="bugtracker">https://github.com/VitexSoftware/multiflexi-database-connection/issues</url>
+  <extends>cz.vitexsoftware.multiflexi</extends>
+  <categories>
+    <category>Office</category>
+  </categories>
+  <provides>
+    <library>MultiFlexi/CredentialProtoType/DatabaseConnection.php</library>
+  </provides>
+  <releases>
+    <release version="2.1.0" date="2026-09-01" type="development" />
+  </releases>
+  <developer id="cz.vitexsoftware">
+    <name>Vítězslav Dvořák</name>
+  </developer>
+  <content_rating type="oars-1.1" />
+</component>

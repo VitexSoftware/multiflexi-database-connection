@@ -1,2 +1,4 @@
 src/MultiFlexi/CredentialProtoType/DatabaseConnection.php  usr/share/php/MultiFlexi/CredentialProtoType/
 src/images/DatabaseConnection.svg                           usr/share/multiflexi/images/
+multiflexi-database-connection.svg                          usr/share/icons/hicolor/scalable/apps/
+debian/cz.vitexsoftware.multiflexi_database_connection.metainfo.xml  usr/share/metainfo/
